@@ -1,28 +1,20 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'recovery'
-            keyPassword '123456'
-            storePassword '123456'
-            storeFile file('store.jks')
-        }
-    }
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
-    resourcePrefix ""
+
     defaultConfig {
-        applicationId "com.zxy.recovery.test"
         minSdkVersion 14
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -30,14 +22,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    debugCompile project(':recovery')
-    releaseCompile project(':recovery_no_op')
-    //    compile 'com.zxy.android:recovery:0.1.0'
-    compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'com.android.support:design:24.2.0'
+//    compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
 }
